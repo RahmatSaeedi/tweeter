@@ -9,7 +9,9 @@
     "local": "./node_modules/.bin/nodemon --watch server -e js server/index.js"
   },
   "author": "Rahmat Saeedi",
-  "contributors" : ["Lighthouse Labs"],
+  "contributors": [
+    "Lighthouse Labs"
+  ],
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -19,5 +21,61 @@
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
+  },
+  "eslintConfig" : {
+    "env": {
+      "commonjs": true,
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2019
+    },
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-var": "error",
+      "no-console": "off",
+      "no-unused-vars": "warn",
+      "func-call-spacing": [
+        "error",
+        "never"
+      ],
+      "space-before-blocks": "error",
+      "keyword-spacing": "error",
+      "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+      "semi-spacing": "error",
+      "func-style": ["error", "expression"],
+      "space-infix-ops": "error",
+      "space-in-parens": "error",
+      "camelcase": "error",
+      "eqeqeq": "error",
+      "brace-style": "error",
+      "space-before-function-paren": [ "warn", { "anonymous": "never", "named": "never", "asyncArrow": "never" } ],
+      "func-names": ["error", "never"],
+      "quotes": "off"
+    }
+  },
+  "eslintIgnore": ["public/vendor/*"],
+  "jshint" : {
+    "esversion": 2019,
+    "node" : true
   }
+
 }
