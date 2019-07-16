@@ -5,6 +5,8 @@
  */
 html {
   box-sizing: border-box;
+  font-size: 24px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -13,13 +15,78 @@ html {
 /*
  * Global layout stuff
  */
-
+ .Clearfix:before,
+ .Clearfix:after {
+     content: " ";
+     display: table;
+ }
+ 
+ .Clearfix:after {
+     clear: both;
+ }
+ 
+ .Clearfix {
+     *zoom: 1;
+ }
+ 
 body {
   color: #545149;
   background-color: #f4f1ec;
-  font-size: 24px;
 }
 
 /*
- * Additional CSS can be defined below or in other CSS files, as per instructions
+ * Navigation bar
  */
+nav {
+  position: fixed;
+  height: 120px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #4056A1;
+  color: #fff;
+  padding: 1.5em;
+ }
+  nav > span {
+    font-family: 'Bungee', cursive;
+    position: relative;
+  }
+  nav > div {
+    float: right;
+  }
+
+/*
+ * Avatar : header
+ */
+header {
+  height: 500px;
+  padding-top: 120px;
+  width: 100%;
+  background-color: #a5ff1f;
+  background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+
+
+}
+  header > div {
+    width: 300px;
+    margin: auto;
+    padding: 0;
+  }
+
+  header > div > * {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+
+/*
+ * Main container
+ */
+.container {
+  min-height: 2000px;
+  background-color: red;
+  width: 90%;
+  margin: 0 auto 0 auto;
+  overflow:auto
+}
