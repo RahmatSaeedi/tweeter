@@ -115,7 +115,6 @@ header > div > * {
   border-color: #505000;
   overflow: hidden;
   resize: none;
-  maxlength: 3;
 }
 
 .new-tweet-submit, .new-tweet-counter {
