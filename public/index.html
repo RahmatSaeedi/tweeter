@@ -3,47 +3,42 @@
   <head>
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
-
     <!-- External CSS -->
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Bungee|Source+Sans+Pro:300,300i,600,600i,700,700i&display=swap" rel="stylesheet">
-
     <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css"/>
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
-
   <body>
-
     <!-- Top nav bar (fixed) -->
     <nav>
       <span id="logo">tweeter</span>
-      <div> Write a new tweet</div>
+      <div>Write a new tweet</div>
     </nav>
-
-    <header>
+    <header class="Clearfix">
       <div>
         <img src="/images/profile-hex.png">
-      </div> 
+      </div>
       <div>
         <h2>Your Name</h2>
       </div>
     </header>
-
     <!-- Page-specific (main) content here -->
-    <main class="container Clearfix">
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
-    </main>
+    <main class="container">
+      <section class="new-tweet">
+        <h2>Compose</h2>
+        <form class="Clearfix" method="POST" action="/tweets/">
+          <textarea maxlength="140" class="new-tweet-text" name="text" placeholder="What are you humming about?"></textarea>
+          <input class="new-tweet-submit" type="submit" value="Tweet"/>
+          <span class="new-tweet-counter">140</span>
+        </form>
+      </section>
 
+      <p style="height: 10000px;"></p>
+    </main>
   </body>
 </html>

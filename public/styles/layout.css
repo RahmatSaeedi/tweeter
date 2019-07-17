@@ -1,13 +1,9 @@
-/*
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- * https://css-tricks.com/international-box-sizing-awareness-day/
- * Do not modify these two selectors, please
- */
 html {
   box-sizing: border-box;
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -15,23 +11,22 @@ html {
 /*
  * Global layout stuff
  */
- .Clearfix:before,
- .Clearfix:after {
-     content: " ";
-     display: table;
- }
- 
- .Clearfix:after {
-     clear: both;
- }
- 
- .Clearfix {
-     *zoom: 1;
- }
- 
+.Clearfix:before, .Clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.Clearfix:after {
+  clear: both;
+}
+
+.Clearfix {
+  *zoom: 1; }
+
 body {
   color: #545149;
-  background-color: #f4f1ec;
+  background-color: #e5ffd5;
+  background-image: url("https://www.transparenttextures.com/patterns/low-contrast-linen.png");
 }
 
 /*
@@ -44,49 +39,106 @@ nav {
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: #4056A1;
+  background-color: #4f7fff;
   color: #fff;
   padding: 1.5em;
- }
-  nav > span {
-    font-family: 'Bungee', cursive;
-    position: relative;
-  }
-  nav > div {
-    float: right;
-  }
+}
+
+nav > span {
+  font-family: 'Bungee', cursive;
+  position: relative;
+}
+
+nav > div {
+  float: right;
+}
 
 /*
  * Avatar : header
  */
 header {
   height: 500px;
-  padding-top: 120px;
+  padding-top: 125px;
   width: 100%;
-  background-color: #a5ff1f;
+  background-color: #a5ff6f;
   background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
-
-
 }
-  header > div {
-    width: 300px;
-    margin: auto;
-    padding: 0;
-  }
 
-  header > div > * {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-  }
+header > div {
+  width: 300px;
+  margin: auto;
+  padding: 0;
+}
+
+header > div > * {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
 
 /*
  * Main container
  */
 .container {
   min-height: 2000px;
-  background-color: red;
   width: 90%;
   margin: 0 auto 0 auto;
-  overflow:auto
+  overflow: auto;
 }
+
+/*
+ * New Tweet
+ */
+.new-tweet {
+  width: 100%;
+  background-color: rgba(245,255,229, 0.8);
+  border-radius: 25px;
+  margin: 0;
+  padding: 0 0 30px 0;
+}
+
+.new-tweet > * {
+  margin: 0 auto 0 auto;
+  width: 90%;
+  padding: 10px;
+}
+
+.new-tweet-text {
+  background-color: #ecffcf;
+  margin-bottom: 10px;
+  padding: 1em;
+  width: 100%;
+  height: 3em;
+  border: none;
+  border-bottom: solid;
+  border-radius: 15px 15px 0 0;
+  border-color: #505000;
+  overflow: hidden;
+  resize: none;
+  maxlength: 3;
+}
+
+.new-tweet-submit, .new-tweet-counter {
+  font-family: 'Bungee', cursive;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+}
+
+.new-tweet-submit {
+  min-width: 150px;
+  background-color: #0088ff;
+  float: left;
+}
+
+.new-tweet-counter {
+  text-align: right;
+  color: #505000;
+  float: right;
+}
+
+
+/*
+ * Tweet Container
+ */

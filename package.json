@@ -27,7 +27,9 @@
       "commonjs": true,
       "es6": true,
       "node": true,
-      "mocha": true
+      "mocha": true,
+      "browser": true,
+      "jquery": true
     },
     "extends": "eslint:recommended",
     "globals": {
@@ -72,7 +74,7 @@
       "quotes": "off"
     }
   },
-  "eslintIgnore": ["public/vendor/*"],
+  "eslintIgnore": ["public/vendor/*", "node_modules/"],
   "jshint" : {
     "esversion": 2019,
     "node" : true
