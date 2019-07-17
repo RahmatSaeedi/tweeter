@@ -2,6 +2,8 @@ html {
   box-sizing: border-box;
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 *, *:before, *:after {
@@ -24,7 +26,8 @@ html {
   *zoom: 1; }
 
 body {
-  color: #545149;
+  color: #505000;
+  border: none;
   background-color: #e5ffd5;
   background-image: url("https://www.transparenttextures.com/patterns/low-contrast-linen.png");
 }
@@ -56,7 +59,7 @@ nav > div {
 /*
  * Avatar : header
  */
-header {
+body > header {
   height: 500px;
   padding-top: 125px;
   width: 100%;
@@ -64,13 +67,13 @@ header {
   background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
 }
 
-header > div {
+body > header > div {
   width: 300px;
   margin: auto;
   padding: 0;
 }
 
-header > div > * {
+body > header > div > * {
   width: 100%;
   margin: auto;
   text-align: center;
@@ -82,8 +85,10 @@ header > div > * {
 .container {
   min-height: 2000px;
   width: 90%;
+  padding: 15px 5% 0 5%;
   margin: 0 auto 0 auto;
   overflow: auto;
+  background-color: rgba(245,255,229, 0.8);
 }
 
 /*
@@ -91,15 +96,14 @@ header > div > * {
  */
 .new-tweet {
   width: 100%;
-  background-color: rgba(245,255,229, 0.8);
   border-radius: 25px;
-  margin: 0;
-  padding: 0 0 30px 0;
+  margin: 0 0 30px 0;
+  padding: 0 5% 0 5%;
 }
 
 .new-tweet > * {
   margin: 0 auto 0 auto;
-  width: 90%;
+  width: 100%;
   padding: 10px;
 }
 
@@ -108,7 +112,7 @@ header > div > * {
   margin-bottom: 10px;
   padding: 1em;
   width: 100%;
-  height: 3em;
+  height: 4em;
   border: none;
   border-bottom: solid;
   border-radius: 15px 15px 0 0;
@@ -131,13 +135,73 @@ header > div > * {
   float: left;
 }
 
+.new-tweet-submit:hover {
+  background-color: #33a0ff;
+  box-shadow: 2px 2px #006dcc;
+}
+
 .new-tweet-counter {
   text-align: right;
   color: #505000;
   float: right;
 }
 
-
 /*
  * Tweet Container
  */
+.tweet {
+  border: 3px solid #505000;
+  width: 90%;
+  margin: 0 5% 30px auto;
+  padding: 0 0 0 0;
+}
+
+.tweet:hover {
+  box-shadow: 10px 10px #b0b05f;
+}
+
+.tweet > * {
+  height: 100px;
+  width: 90%;
+  margin: 50px 5% 0 5%;
+}
+
+.tweet img {
+  width: 100px;
+  height: 100px;
+  background: url(/images/icons/batman.svg) no-repeat;
+  float: left;
+  border: none;
+}
+
+.tweet > header > div:first-of-type {
+  float: left;
+  height: 100px;
+  padding: 33px 0 0 33px;
+  font-weight: 400;
+}
+
+.tweet > header > div:nth-of-type(2) {
+  float: right;
+  height: 100px;
+  padding: 33px 0 0 33px;
+  font-weight: 700;
+}
+
+.tweet > div {
+  width: 90%;
+  margin: 0 5% 0 5%;
+  padding: 50px 1em 0 1em;
+  border-bottom: 3px solid;
+}
+
+.tweet > footer {
+  margin-top: 5px;
+}
+.tweet > footer > div:first-of-type {
+  float: left;
+}
+
+.tweet > footer > div:nth-of-type(2){
+  float: right;
+}

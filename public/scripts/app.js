@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // sets up
   $(".new-tweet-submit").on('click', function(e) {
-    alert(JSON.stringify(this));
+    //alert(JSON.stringify(this));
     //$(this).css('color', 'red');
     e.preventDefault();
   });
