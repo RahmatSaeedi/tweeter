@@ -32,24 +32,15 @@
       <section class="new-tweet">
         <h2>Compose</h2>
         <form class="Clearfix" method="POST" action="/tweets/">
-          <textarea maxlength="140" class="new-tweet-text" name="text" placeholder="What are you humming about?"></textarea>
-          <input class="new-tweet-submit" type="submit" value="Tweet"/>
-          <span class="new-tweet-counter">140</span>
+          <textarea maxlength="140" name="text" placeholder="What are you humming about?"></textarea>
+          <input type="submit" value="Tweet"/>
+          <span>140</span>
         </form>
       </section>
-      <article class="tweet">
-        <header class="Clearfix">
-          <img />
-          <div>Elmer Lazzeri </div>
-          <div>@Lazzeri </div>
-        </header>
-        <div class="tweet-text">wow what a terrific app</div>
-        <footer class="Clearfix">
-          <div>10 days ago</div>
-          <div>like</div>
-        </footer>
-      </article>
-      <p style="height: 10000px;"></p>
+      <div id="tweets-container">
+        
+      </div>
     </main>
+    <p style="height: 10000px;"></p>
   </body>
 </html>

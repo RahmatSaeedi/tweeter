@@ -107,7 +107,7 @@ body > header > div > * {
   padding: 10px;
 }
 
-.new-tweet-text {
+.new-tweet textarea {
   background-color: #ecffcf;
   margin-bottom: 10px;
   padding: 1em;
@@ -121,7 +121,7 @@ body > header > div > * {
   resize: none;
 }
 
-.new-tweet-submit, .new-tweet-counter {
+.new-tweet input, .new-tweet span {
   font-family: 'Bungee', cursive;
   color: #fff;
   border: none;
@@ -129,18 +129,18 @@ body > header > div > * {
   padding: 0;
 }
 
-.new-tweet-submit {
+.new-tweet input {
   min-width: 150px;
   background-color: #0088ff;
   float: left;
 }
 
-.new-tweet-submit:hover {
+.new-tweet input:hover {
   background-color: #33a0ff;
   box-shadow: 2px 2px #006dcc;
 }
 
-.new-tweet-counter {
+.new-tweet span {
   text-align: right;
   color: #505000;
   float: right;
@@ -169,7 +169,6 @@ body > header > div > * {
 .tweet img {
   width: 100px;
   height: 100px;
-  background: url(/images/icons/batman.svg) no-repeat;
   float: left;
   border: none;
 }
