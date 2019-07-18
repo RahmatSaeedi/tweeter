@@ -44,16 +44,43 @@ nav {
   z-index: 100;
   background-color: #4f7fff;
   color: #fff;
-  padding: 1.5em;
+  padding: 1.5em 1.5em 0 1.5em;
 }
 
-nav > span {
+#logo {
   font-family: 'Bungee', cursive;
   position: relative;
 }
 
 nav > div {
   float: right;
+  height: 100%;
+  width: 10em;
+  display: table;
+  text-align: center;
+}
+
+nav > div a {
+  font-weight:900;
+}
+
+nav > div > div {
+  width: 35px;
+  height: 35px;
+  background-image: url("/images/icons/double-chevron-down.svg");
+  background-repeat: no-repeat;
+  margin: auto;
+  animation: vTranslate 1.5s infinite ease-out;
+}
+
+@keyframes vTranslate {
+    0%, 100% {
+      transform: translateY(50%);
+    }
+    
+    45% {
+      transform: translateY(-20%);
+    }
 }
 
 /*
