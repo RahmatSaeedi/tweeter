@@ -1,38 +1,40 @@
 $(document).ready(function() {
   // Creates a new tweet element
-  const createTweetElement = (tweet, includeArticleTag = false) => {
+  const createTweetElement = function(tweet, includeArticleTag) {
+    includeArticleTag = arguments.length > 1 && arguments[1] !== undefined ? includeArticleTag : false;
+
     if (!includeArticleTag) {
-      return `
-        <header class="Clearfix">
-          <img src="${tweet.user.avatars}"/>
-          <div>${tweet.user.name}</div>
-          <div>${tweet.user.handle}</div>
-        </header>
-        <div class="tweet-text">${tweet.content.text}</div>
-        <footer class="Clearfix">
-          <div>${new Date(tweet.created_at)}</div>
-          <div>like</div>
-        </footer>`;
+      return '\
+        <header class="Clearfix">\
+          <img src="' + tweet.user.avatars + '"/>\
+          <div>' + tweet.user.name + '</div>\
+          <div>' + tweet.user.handle + '</div>\
+        </header>\
+        <div class="tweet-text">' + tweet.content.text + '</div>\
+        <footer class="Clearfix">\
+          <div>' + new Date(tweet.created_at) + '</div>\
+          <div>like</div>\
+        </footer>';
     } else {
-      return `
-      <article class="tweet">
-        <header class="Clearfix">
-          <img src="${tweet.user.avatars}"/>
-          <div>${tweet.user.name}</div>
-          <div>${tweet.user.handle}</div>
-        </header>
-        <div class="tweet-text">${tweet.content.text}</div>
-        <footer class="Clearfix">
-          <div>${new Date(tweet.created_at)}</div>
-          <div>like</div>
-        </footer>
-      </article>`;
+      return '\
+      <article class="tweet">\
+        <header class="Clearfix">\
+          <img src="' + tweet.user.avatars + '"/>\
+          <div>' + tweet.user.name + '</div>\
+          <div>' + tweet.user.handle + '</div>\
+        </header>\
+        <div class="tweet-text">' + tweet.content.text + '</div>\
+        <footer class="Clearfix">\
+          <div>' + new Date(tweet.created_at) + '</div>\
+          <div>like</div>\
+        </footer>\
+      </article>';
     }
   };
 
   // Form validation:
   const validateForm = function(form) {
-    const tweetLength = $(form).find('textarea')[0].textLength;
+    const tweetLength = $(form).find('textarea').val().length;
     if (tweetLength > 0) {
       if (tweetLength < 141) {
         return true;
@@ -62,35 +64,36 @@ $(document).ready(function() {
         data: $(this).serialize(),
         complete: null,   // Callback when finished
         error: null,      // Callback in case of error
-        success: () => {  // Callbackin case of success response
+        success: function() {  // Callbackin case of success response
           document.getElementById('tweets-container').innerHTML = '';
           loadTweets();
         },
         timeout: null    // Timeout before emitting fail
-      }).done((e) => {
+      }).done(function(e) {
         console.log('Tweeted successfuly');
-      }).fail((e) => {
+      }).fail(function(e) {
         console.log('Faild to Tweet');
       });
     }
   });
 
 
-  // Fetches tweets via jQuery - ajax
+  // Fetches and prepends tweets. via jQuery - ajax
   const loadTweets = function() {
     $.ajax({
       url: '/tweets/',
-      method: 'GET'
-    }).done((tweets) => {
+      method: 'GET',
+      cache: false
+    }).done(function(tweets) {
       tweets.forEach(function(tweet) {
-        console.log(typeof(createTweetElement(tweet)));
         const article = document.createElement('article');
         article.classList.add('tweet');
         article.innerHTML = createTweetElement(tweet).trim();
-        document.getElementById('tweets-container').prepend(article);
+        const tc = document.getElementById('tweets-container');
+        tc.insertBefore(article, tc.childNodes[0]);
       });
       console.log('Obtained tweets successfuly');
-    }).fail((error) => {
+    }).fail(function(e) {
       console.log('Faild to get tweets');
     });
   };
