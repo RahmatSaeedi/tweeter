@@ -1,9 +1,5 @@
 html {
   box-sizing: border-box;
-  font-size: 24px;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 300;
-  font-style: normal;
 }
 
 *, *:before, *:after {
@@ -23,13 +19,24 @@ html {
 }
 
 .Clearfix {
-  *zoom: 1; }
+  *zoom: 1;
+}
+
+*:focus {
+  outline: none;
+}
 
 body {
+  font-size: 24px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-style: normal;
   color: #505000;
   border: none;
   background-color: #e5ffd5;
   background-image: url("https://www.transparenttextures.com/patterns/low-contrast-linen.png");
+  min-width: 500px;
+  min-height: 1200px;
 }
 
 /*
@@ -37,7 +44,7 @@ body {
  */
 nav {
   position: fixed;
-  height: 120px;
+  min-height: 120px;
   top: 0;
   left: 0;
   width: 100%;
@@ -52,21 +59,24 @@ nav {
   position: relative;
 }
 
-nav > div {
+#navToggler {
   float: right;
-  height: 100%;
+  min-height: 100%;
   width: 10em;
   display: table;
   text-align: center;
 }
-
-nav > div a {
+#navToggler:hover {
+  cursor: pointer;
+}
+#navToggler a {
   font-weight:900;
+  text-decoration: none;
 }
 
-nav > div > div {
+#navToggler > div {
   width: 35px;
-  height: 35px;
+  min-height: 35px;
   background-image: url("/images/icons/double-chevron-down.svg");
   background-repeat: no-repeat;
   margin: auto;
@@ -87,17 +97,20 @@ nav > div > div {
  * Avatar : header
  */
 body > header {
-  height: 500px;
-  padding-top: 125px;
+  min-height: 500px;
+  margin-top: 120px;
+  padding-top: 15px;
   width: 100%;
-  background-color: #a5ff6f;
+  background-color: #c8dc20;
   background-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+  color: #fff;
 }
 
 body > header > div {
   width: 300px;
   margin: auto;
   padding: 0;
+
 }
 
 body > header > div > * {
@@ -109,8 +122,8 @@ body > header > div > * {
 /*
  * Main container
  */
-.container {
-  min-height: 2000px;
+#container {
+  min-height: 500px;
   width: 90%;
   padding: 15px 5% 0 5%;
   margin: 0 auto 0 auto;
@@ -121,25 +134,25 @@ body > header > div > * {
 /*
  * New Tweet
  */
-.new-tweet {
+#new-tweet {
   width: 100%;
   border-radius: 25px;
   margin: 0 0 30px 0;
   padding: 0 5% 0 5%;
 }
 
-.new-tweet > * {
+#new-tweet > * {
   margin: 0 auto 0 auto;
   width: 100%;
   padding: 10px;
 }
 
-.new-tweet textarea {
+#new-tweet textarea {
   background-color: #ecffcf;
   margin-bottom: 10px;
   padding: 1em;
   width: 100%;
-  height: 4em;
+  min-height: 4em;
   border: none;
   border-bottom: solid;
   border-radius: 15px 15px 0 0;
@@ -148,7 +161,7 @@ body > header > div > * {
   resize: none;
 }
 
-.new-tweet input, .new-tweet span {
+#new-tweet input, #new-tweet span {
   font-family: 'Bungee', cursive;
   color: #fff;
   border: none;
@@ -156,18 +169,24 @@ body > header > div > * {
   padding: 0;
 }
 
-.new-tweet input {
+#new-tweet input {
   min-width: 150px;
   background-color: #0088ff;
   float: left;
 }
 
-.new-tweet input:hover {
+#new-tweet input:hover {
   background-color: #33a0ff;
   box-shadow: 2px 2px #006dcc;
 }
 
-.new-tweet span {
+#new-tweet input:focus {
+  outline-style: dotted;
+  outline-color: green;
+  outline-width: thin;
+}
+
+#new-tweet span {
   text-align: right;
   color: #505000;
   float: right;
@@ -188,28 +207,28 @@ body > header > div > * {
 }
 
 .tweet > * {
-  height: 100px;
+  min-height: 100px;
   width: 90%;
   margin: 50px 5% 0 5%;
 }
 
 .tweet img {
   width: 100px;
-  height: 100px;
+  min-height: 100px;
   float: left;
   border: none;
 }
 
 .tweet > header > div:first-of-type {
   float: left;
-  height: 100px;
+  min-height: 100px;
   padding: 33px 0 0 33px;
   font-weight: 400;
 }
 
 .tweet > header > div:nth-of-type(2) {
   float: right;
-  height: 100px;
+  min-height: 100px;
   padding: 33px 0 0 33px;
   font-weight: 700;
 }
@@ -231,3 +250,92 @@ body > header > div > * {
 .tweet > footer > div:nth-of-type(2){
   float: right;
 }
+.tweet > footer .flag {
+  color: #00a6a6;
+  padding: 0 5px 5px ;
+  cursor: pointer;
+}
+
+#scrollUp {
+  background-image: url('/images/icons/arrow-up.svg');
+  background-repeat: no-repeat;
+  width: 100px;
+  min-height: 100px;
+  margin: 20px;
+  position:fixed;
+  z-index: 100;
+  display: none;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+#messages, #messages > .success, #messages > .error {
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px
+}
+
+#messages > .error {
+  color: red;
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+#messages > .success {
+  color: darkgreen;
+  border: 1px solid darkgreen;
+  border-radius: 10px;
+}
+
+#messages > .error:before, #messages > .error:after{
+  content:' \2003 \2717 \2003 ';
+}
+
+#messages > .success:before{
+  content:' \2003 \2713 \2003 ';
+}
+
+
+@media all and (min-width:959px){
+  body {
+    display: flex;
+  }
+  body > header {
+    display: block;
+    width: 33%;
+  }
+
+  body > #container {
+    float: right;
+    width: 67%;
+    margin-top: 120px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .tweet > header {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tweet > header > div:first-of-type, .tweet > header > div:nth-of-type(2) {
+    float: right;
+    text-align:center;
+    width: 100%;
+    min-height: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .tweet > header > img {
+    float: none;
+    display: block;
+    margin: 10px auto 10px auto;
+  }
+}
+  

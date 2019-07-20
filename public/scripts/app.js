@@ -12,8 +12,8 @@ $(document).ready(function() {
         </header>\
         <div class="tweet-text">' + tweet.content.text + '</div>\
         <footer class="Clearfix">\
-          <div>' + new Date(tweet.created_at) + '</div>\
-          <div>like</div>\
+          <div>' + moment(tweet.createdAt) + '</div>\
+          <div><div class="flag">&#x2691;</div></div>\
         </footer>';
     } else {
       return '\
@@ -25,8 +25,8 @@ $(document).ready(function() {
         </header>\
         <div class="tweet-text">' + tweet.content.text + '</div>\
         <footer class="Clearfix">\
-          <div>' + new Date(tweet.created_at) + '</div>\
-          <div>like</div>\
+          <div>' + moment(tweet.createdAt) + '</div>\
+          <div><div class="flag">&#x2691;</div></div>\
         </footer>\
       </article>';
     }
@@ -39,21 +39,17 @@ $(document).ready(function() {
       if (tweetLength < 141) {
         return true;
       } else {
-        setTimeout(function() {
-          alert('Too many characters are in your tweet!');
-        },1);
+        addMessage('Too many characters are in your tweet!', false);
         return false;
       }
     } else {
-      setTimeout(function() {
-        alert('Empty Tweet!');
-      }, 1);
+      addMessage('Empty Tweet!', false);
       return false;
     }
   };
 
   // jQuery - ajax tweet submission
-  $(".new-tweet form").submit(function(e) {
+  $("#new-tweet form").submit(function(e) {
     e.preventDefault();
     
     if (validateForm(this)) {
@@ -65,13 +61,13 @@ $(document).ready(function() {
         complete: null,   // Callback when finished
         error: null,      // Callback in case of error
         success: function() {  // Callbackin case of success response
-          document.getElementById('tweets-container').innerHTML = '';
+          addMessage('Tweeted \u2003 \u27FF', true);
           loadTweets();
         },
         timeout: null    // Timeout before emitting fail
-      }).done(function(e) {
+      }).done(function() {
         console.log('Tweeted successfuly');
-      }).fail(function(e) {
+      }).fail(function() {
         console.log('Faild to Tweet');
       });
     }
@@ -85,25 +81,92 @@ $(document).ready(function() {
       method: 'GET',
       cache: false
     }).done(function(tweets) {
+      const section = document.createElement('section');
+      section.id = "tweets-container";
       tweets.forEach(function(tweet) {
         const article = document.createElement('article');
         article.classList.add('tweet');
         article.innerHTML = createTweetElement(tweet).trim();
-        const tc = document.getElementById('tweets-container');
-        tc.insertBefore(article, tc.childNodes[0]);
+        section.insertBefore(article, section.childNodes[0]);
       });
+      
+      document.getElementById('tweets-container').replaceWith(section);
       console.log('Obtained tweets successfuly');
-    }).fail(function(e) {
+    }).fail(function() {
       console.log('Faild to get tweets');
     });
   };
 
   // Updates the character counter for new-tweet
-  $(".new-tweet textarea").on('keyup', function(e) {
+  $("#new-tweet textarea").on('input', function() {
     $(this).siblings('span').html(140 - $(this).val().length);
   });
 
   // Loads the initial tweets
   loadTweets();
 
+  // Add event listener for Navbar toggle button
+  $('#navToggler').on('click', function() {
+    $('#new-tweet').slideToggle();
+  });
+
+
+  const moment = function(_date) {
+    const difference =  Date.now() - _date;
+    let r;
+    if (difference < 1000) {
+      r = 'just now';
+    } else if (difference < 60000) {
+      r = Math.floor(difference / 1000) + ' seconds ago';
+    } else if (difference < 360000) {
+      r = Math.floor(difference / 60000) + ' minutes ' + Math.floor(difference / 1000) % 60 + ' and seconds ago';
+    } else if (difference < 3600000) {
+      r = Math.floor(difference / 60000) + ' minutes ago';
+    } else if (difference < 86400000) {
+      r = Math.floor(difference / 3600000) + ' hours ' + Math.floor(difference / 60000) % 60 + ' and minutes ago';
+    } else if (difference < 259200000) {
+      r = Math.floor(difference / 86400000) + ' days ' + Math.floor(difference / 3600000) % 24 + ' and hours ago';
+    } else if (difference < 2592000000) {
+      r = Math.floor(difference / 86400000) + ' days ago';
+    } else if (difference < 31104000000) {
+      r = Math.floor(difference / 2592000000) + ' months ago';
+    } else {
+      r = Math.floor(difference / 31104000000) + ' years ago';
+    }
+    return r;
+  };
+
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 700) {
+      $('#scrollUp').css('display','block');
+    } else {
+      $('#scrollUp').css('display','none');
+    }
+  });
+
+  $('#scrollUp').on('click', function() {
+    console.log('go up');
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+  });
+
+  const addMessage = function(messageString, type) {
+    type = typeof(type) === 'boolean' ? type : false;
+    if (type) {
+      let node = document.createElement('div');
+      node.classList.add('success');
+      node.innerText = messageString;
+      let r = document.getElementById("messages").appendChild(node);
+      $(r).fadeOut(5000, function() {
+        $(this).remove();
+      });
+    } else {
+      let node = document.createElement('div');
+      node.classList.add('error');
+      node.innerText = messageString;
+      let r = document.getElementById("messages").appendChild(node);
+      $(r).fadeOut(5000, function() {
+        $(this).remove();
+      });
+    }
+  };
 });
