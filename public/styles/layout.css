@@ -1,3 +1,6 @@
+/***********************
+ * Global layout design
+ ***********************/
 html {
   box-sizing: border-box;
 }
@@ -6,9 +9,6 @@ html {
   box-sizing: inherit;
 }
 
-/*
- * Global layout stuff
- */
 .Clearfix:before, .Clearfix:after {
   content: " ";
   display: table;
@@ -19,8 +19,7 @@ html {
 }
 
 .Clearfix {
-  *zoom: 1;
-}
+  *zoom: 1; }
 
 *:focus {
   outline: none;
@@ -37,11 +36,12 @@ body {
   background-image: url("https://www.transparenttextures.com/patterns/low-contrast-linen.png");
   min-width: 500px;
   min-height: 1200px;
+  overflow-wrap: break-word;
 }
 
-/*
+/***********************
  * Navigation bar
- */
+ ***********************/
 nav {
   position: fixed;
   min-height: 120px;
@@ -66,11 +66,13 @@ nav {
   display: table;
   text-align: center;
 }
+
 #navToggler:hover {
   cursor: pointer;
 }
+
 #navToggler a {
-  font-weight:900;
+  font-weight: 900;
   text-decoration: none;
 }
 
@@ -84,18 +86,18 @@ nav {
 }
 
 @keyframes vTranslate {
-    0%, 100% {
-      transform: translateY(50%);
-    }
-    
-    45% {
-      transform: translateY(-20%);
-    }
+  0%, 100% {
+    transform: translateY(50%);
+  }
+
+  45% {
+    transform: translateY(-20%);
+  }
 }
 
-/*
+/***********************
  * Avatar : header
- */
+ ***********************/
 body > header {
   min-height: 500px;
   margin-top: 120px;
@@ -110,7 +112,6 @@ body > header > div {
   width: 300px;
   margin: auto;
   padding: 0;
-
 }
 
 body > header > div > * {
@@ -119,9 +120,15 @@ body > header > div > * {
   text-align: center;
 }
 
-/*
+body > header > div > h2 {
+  text-shadow: 0 0 5px black, 0 0 8px blue, 0 0 15px green;
+}
+
+/***********************
  * Main container
- */
+ *  - new tweets
+ *  _ tweets container
+ ***********************/
 #container {
   min-height: 500px;
   width: 90%;
@@ -131,9 +138,9 @@ body > header > div > * {
   background-color: rgba(245,255,229, 0.8);
 }
 
-/*
- * New Tweet
- */
+/***********************
+ * New Tweet Form
+ ***********************/
 #new-tweet {
   width: 100%;
   border-radius: 25px;
@@ -181,8 +188,8 @@ body > header > div > * {
 }
 
 #new-tweet input:focus {
-  outline-style: dotted;
-  outline-color: green;
+  outline-style: solid;
+  outline-color: #33a0ff;
   outline-width: thin;
 }
 
@@ -192,9 +199,9 @@ body > header > div > * {
   float: right;
 }
 
-/*
- * Tweet Container
- */
+/***********************
+ * A Single Tweet
+ ***********************/
 .tweet {
   border: 3px solid #505000;
   width: 90%;
@@ -243,26 +250,31 @@ body > header > div > * {
 .tweet > footer {
   margin-top: 5px;
 }
+
 .tweet > footer > div:first-of-type {
   float: left;
 }
 
-.tweet > footer > div:nth-of-type(2){
+.tweet > footer > div:nth-of-type(2) {
   float: right;
 }
+
 .tweet > footer .flag {
   color: #00a6a6;
   padding: 0 5px 5px ;
   cursor: pointer;
 }
 
+/*************************
+* Bottom of page scroller
+*************************/
 #scrollUp {
   background-image: url('/images/icons/arrow-up.svg');
   background-repeat: no-repeat;
   width: 100px;
   min-height: 100px;
   margin: 20px;
-  position:fixed;
+  position: fixed;
   z-index: 100;
   display: none;
   bottom: 0;
@@ -270,6 +282,11 @@ body > header > div > * {
   cursor: pointer;
 }
 
+/***********************
+* Messages
+*  - Error messages
+*  - Success messages
+***********************/
 #messages, #messages > .success, #messages > .error {
   width: 100%;
   text-align: center;
@@ -289,19 +306,22 @@ body > header > div > * {
   border-radius: 10px;
 }
 
-#messages > .error:before, #messages > .error:after{
-  content:' \2003 \2717 \2003 ';
+#messages > .error:before, #messages > .error:after {
+  content: ' \2003 \2717 \2003 ';
 }
 
-#messages > .success:before{
-  content:' \2003 \2713 \2003 ';
+#messages > .success:before {
+  content: ' \2003 \2713 \2003 ';
 }
 
-
-@media all and (min-width:959px){
+/***********************
+* Extra Large screen
+***********************/
+@media all and (min-width: 959px) {
   body {
     display: flex;
   }
+
   body > header {
     display: block;
     width: 33%;
@@ -312,8 +332,19 @@ body > header > div > * {
     width: 67%;
     margin-top: 120px;
   }
+
+  .tweet > * > div:nth-of-type(2), .tweet > * > div:nth-of-type(2) > * {
+    display: none;
+  }
+
+  .tweet:hover > * > div:nth-of-type(2), .tweet:hover > * > div:nth-of-type(2) > * {
+    display: block;
+  }
 }
 
+/***********************
+* Small Screens
+***********************/
 @media all and (max-width: 767px) {
   .tweet > header {
     width: 100%;
@@ -323,7 +354,7 @@ body > header > div > * {
 
   .tweet > header > div:first-of-type, .tweet > header > div:nth-of-type(2) {
     float: right;
-    text-align:center;
+    text-align: center;
     width: 100%;
     min-height: 100%;
     height: 50px;
@@ -338,4 +369,3 @@ body > header > div > * {
     margin: 10px auto 10px auto;
   }
 }
-  

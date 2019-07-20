@@ -51,20 +51,22 @@ $(document).ready(function() {
   // jQuery - ajax tweet submission
   $("#new-tweet form").submit(function(e) {
     e.preventDefault();
-    
     if (validateForm(this)) {
       $.ajax({
         url: e.target.action,
         method: 'POST',
         port: 80,
         data: $(this).serialize(),
-        complete: null,   // Callback when finished
-        error: null,      // Callback in case of error
-        success: function() {  // Callbackin case of success response
+        complete: null,
+        // Callback when finished
+        error: null,
+        // Callback in case of error
+        success: function() {
+          // Callbackin case of success response
           addMessage('Tweeted \u2003 \u27FF', true);
           loadTweets();
         },
-        timeout: null    // Timeout before emitting fail
+        timeout: null // Timeout before emitting fail
       }).done(function() {
         console.log('Tweeted successfuly');
       }).fail(function() {
@@ -72,7 +74,6 @@ $(document).ready(function() {
       });
     }
   });
-
 
   // Fetches and prepends tweets. via jQuery - ajax
   const loadTweets = function() {
@@ -89,7 +90,7 @@ $(document).ready(function() {
         article.innerHTML = createTweetElement(tweet).trim();
         section.insertBefore(article, section.childNodes[0]);
       });
-      
+
       document.getElementById('tweets-container').replaceWith(section);
       console.log('Obtained tweets successfuly');
     }).fail(function() {
@@ -106,26 +107,27 @@ $(document).ready(function() {
   loadTweets();
 
   // Add event listener for Navbar toggle button
-  $('#navToggler').on('click', function() {
+  $('#navToggler').on('click', function(e) {
     $('#new-tweet').slideToggle();
+    e.stopPropagation();
   });
 
-
+  // Moments ago
   const moment = function(_date) {
-    const difference =  Date.now() - _date;
+    const difference = Date.now() - _date;
     let r;
-    if (difference < 1000) {
+    if (difference < 3000) {
       r = 'just now';
     } else if (difference < 60000) {
       r = Math.floor(difference / 1000) + ' seconds ago';
     } else if (difference < 360000) {
-      r = Math.floor(difference / 60000) + ' minutes ' + Math.floor(difference / 1000) % 60 + ' and seconds ago';
+      r = Math.floor(difference / 60000) + ' minutes and ' + Math.floor(difference / 1000) % 60 + ' seconds ago';
     } else if (difference < 3600000) {
       r = Math.floor(difference / 60000) + ' minutes ago';
     } else if (difference < 86400000) {
-      r = Math.floor(difference / 3600000) + ' hours ' + Math.floor(difference / 60000) % 60 + ' and minutes ago';
+      r = Math.floor(difference / 3600000) + ' hours and ' + Math.floor(difference / 60000) % 60 + ' minutes ago';
     } else if (difference < 259200000) {
-      r = Math.floor(difference / 86400000) + ' days ' + Math.floor(difference / 3600000) % 24 + ' and hours ago';
+      r = Math.floor(difference / 86400000) + ' days and ' + Math.floor(difference / 3600000) % 24 + ' hours ago';
     } else if (difference < 2592000000) {
       r = Math.floor(difference / 86400000) + ' days ago';
     } else if (difference < 31104000000) {
@@ -136,37 +138,48 @@ $(document).ready(function() {
     return r;
   };
 
+  // bottom scroller
   $(window).scroll(function() {
     if ($(this).scrollTop() > 700) {
-      $('#scrollUp').css('display','block');
+      $('#scrollUp').css('display', 'block');
+      $('#navToggler').css('display', 'none');
     } else {
-      $('#scrollUp').css('display','none');
+      $('#scrollUp').css('display', 'none');
+      $('#navToggler').css('display', 'block');
     }
   });
 
-  $('#scrollUp').on('click', function() {
-    console.log('go up');
-    $('html, body').animate({ scrollTop: 0 }, 'fast');
+  $('#scrollUp').on('click', function(e) {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 'fast');
+    e.stopPropagation();
   });
 
+  // error and success messages
   const addMessage = function(messageString, type) {
-    type = typeof(type) === 'boolean' ? type : false;
+    type = typeof (type) === 'boolean' ? type : false;
     if (type) {
       let node = document.createElement('div');
       node.classList.add('success');
       node.innerText = messageString;
       let r = document.getElementById("messages").appendChild(node);
-      $(r).fadeOut(5000, function() {
-        $(this).remove();
-      });
+      setTimeout(function() {
+        $(r).fadeOut(500, function() {
+          $(this).remove();
+        });
+      }, 3000);
+
     } else {
       let node = document.createElement('div');
       node.classList.add('error');
       node.innerText = messageString;
       let r = document.getElementById("messages").appendChild(node);
-      $(r).fadeOut(5000, function() {
-        $(this).remove();
-      });
+      setTimeout(function() {
+        $(r).fadeOut(500, function() {
+          $(this).remove();
+        });
+      }, 1000);
     }
   };
 });
